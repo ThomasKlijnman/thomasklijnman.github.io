@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>A simplified guide: Connecting to the Graph API with PowerShell | Code Artisan Journey</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="A simplified guide: Connecting to the Graph API with PowerShell" />
+<meta name="author" content="Thomas" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In one of my recent side quests, I delved into the realm of the Microsoft Online API services, exploring ways to efficiently specific information from those services using the Microsoft Graph API." />
+<meta property="og:description" content="In one of my recent side quests, I delved into the realm of the Microsoft Online API services, exploring ways to efficiently specific information from those services using the Microsoft Graph API." />
+<link rel="canonical" href="http://localhost:4000/graphapi/a-simplified-guide-connecting-to-microsoft-graph-api-with-powershell/" />
+<meta property="og:url" content="http://localhost:4000/graphapi/a-simplified-guide-connecting-to-microsoft-graph-api-with-powershell/" />
+<meta property="og:site_name" content="Code Artisan Journey" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-01T16:15:03+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="A simplified guide: Connecting to the Graph API with PowerShell" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Thomas"},"dateModified":"2024-01-01T16:15:03+01:00","datePublished":"2024-01-01T16:15:03+01:00","description":"In one of my recent side quests, I delved into the realm of the Microsoft Online API services, exploring ways to efficiently specific information from those services using the Microsoft Graph API.","headline":"A simplified guide: Connecting to the Graph API with PowerShell","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/graphapi/a-simplified-guide-connecting-to-microsoft-graph-api-with-powershell/"},"url":"http://localhost:4000/graphapi/a-simplified-guide-connecting-to-microsoft-graph-api-with-powershell/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Code Artisan Journey" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Code Artisan Journey</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">A simplified guide: Connecting to the Graph API with PowerShell</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2024-01-01T16:15:03+01:00" itemprop="datePublished">Jan 1, 2024
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Thomas</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In one of my recent side quests, I delved into the realm of the Microsoft API services, exploring ways to efficiently retrieve specific information from those services using the Microsoft Graph API. Traditionally, that process for me involved navigating through one or more individual Powershell modules with predefined cmdlets.</p>
+
+<p>However, I discovered a more direct route; leveraging HTTPs calls for querying data.</p>
+
+<p>By opting for HTTPs calls over Powershell modules you can simplify the method for making and posting requests and even throw out your module dependency.</p>
+
+<p>In this blog post I aimed to optimize the approach you need to make for connecting to the Microsoft Graph API and simplify the data retrieval process, one of the possible connection methods to this approach lies involves obtaining an expiring access token through an Entra ID App registration with a client secret.</p>
+
+<p>In an upcoming blog post, I will even delve deeper into the ways of restricting authentication to Microsoft Graph API services using this access token method.</p>
+
+<h2 id="simplifying-the-connection">Simplifying the connection</h2>
+
+<p>Connecting to one of the Microsoft online services via the underlying API can sometimes be a sequence of multiple tasks, especially when dealing with multiple Powershell modules. However, by utilizing HTTPs calls, the process becomes more straightforward and consolidated.</p>
+
+<p>The simplicity of this method allows for a seamless interaction with the array of API services offered by Microsoft without the need for multiple Powershell modules.</p>
+
+<h2 id="access-token-magic">Access Token Magic</h2>
+
+<details class="wp-block-details has-vivid-red-color has-text-color has-link-color has-small-font-size wp-elements-d122976472ec6003c19f8ad69b44c955 is-layout-flow wp-block-details-is-layout-flow"><summary>Disclaimer</summary>This section assumes that you are already familiar with and have set up an Entra ID App registration, along with the addition of API permissions and a client secret.
+
+</details>
+<p>Let’s dive straight into the scripting part. I’ve created a few simple functions in PowerShell that send and retrieve an access token.</p>
+
+<p>See the below scripts that I’ve used for this example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Build the authorization header
+$tokenUrl = "https://login.microsoftonline.com/&lt;em&gt;&lt;strong&gt;&lt; Tenant ID&lt;/strong&gt; &gt;&lt;/em&gt;/oauth2/token"
+$body = @{
+    'resource' = 'https://graph.microsoft.com'
+    'client_id' = &lt;strong&gt;&lt;em&gt;&lt; App registration ID &gt;&lt;/em&gt;&lt;/strong&gt;
+    'client_secret' = &lt;strong&gt;&lt;em&gt;&lt; App registration client secret &gt;&lt;/em&gt;&lt;/strong&gt;
+    'grant_type' = 'client_credentials'
+}
+
+# Obtain the access token
+$tokenResponse = Invoke-RestMethod -Method Post -Uri $tokenUrl -ContentType "application/x-www-form-urlencoded" -Body $body
+$accessToken = $tokenResponse.access_token
+</code></pre></div></div>
+
+<p>In simple terms, the above code requests an access token from login.microsoftonline.com, which later can be used in the below function where I use that earlier generated access token to make an HTTPs call to the Graph API.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Function to invoke the Graph API
+function Invoke-GraphApi {
+    param (
+        [string]$ApiEndpoint,
+        [string]$Method = 'GET',
+        [string]$Body = $null,
+        [string]$Version = 'v1.0'
+        [string]$ContentType = 'application/json'
+    )
+
+    # Set the base URL for the Graph API
+    $baseUrl = "https://graph.microsoft.com/$Version"
+
+    # Authorize with the dynamically obtained access token
+    $authorization = @{
+        'Authorization' = "Bearer $accessToken"
+        'Content-Type' = 'application/json'
+    }
+
+    # Build the full URL
+    $url = "$baseUrl$ApiEndpoint"
+
+    # Execute the HTTP call based on the specified method
+    $response = Invoke-RestMethod -Uri $url -Headers $authorization -Method $Method -Body $Body -ContentType $ContentType
+
+    # Return the response
+    $response
+}
+
+</code></pre></div></div>
+
+<details class="wp-block-details has-small-font-size is-layout-flow wp-block-details-is-layout-flow"><summary>Technical note</summary>Due to limitations in the underlying method used in the .NET Framework by the Invoke-RestMethod, the body parameter can only be used when the HTTP method is not GET. That’s why this script works in Powershell 7. But can be modified to be used in Powershell 5.1.
+
+</details>
+<p>Using both the authorization and function together gives the possibility to make a variety of requests, ranging from simple GET requests to more complex POST and PATCH requests, this along with incorporating parameters in the request body, it enables a simple approach to handling diverse types of requests with ease using the same method.</p>
+
+<p>Well.. How easy can this be?</p>
+
+<p>&lt;figure class=”wp-block-image size-large wp-lightbox-container” data-wp-context=”{“uploadedSrc”:”http:\/\/codeartisanjourney.com\/wp-content\/uploads\/2023\/12\/AccessTokenExample.png”,”figureClassNames”:”wp-block-image size-large”,”figureStyles”:null,”imgClassNames”:”wp-image-123”,”imgStyles”:null,”targetWidth”:1037,”targetHeight”:419,”scaleAttr”:false,”ariaLabel”:”Enlarge image”,”alt”:””}” data-wp-interactive=”core/image”&gt;<img src="https://thomasklijnman.github.io/_site/assets/img/12/AccessTokenExample.png?resize=640%2C259" alt="" /><button aria-haspopup="dialog" aria-label="Enlarge image" class="lightbox-trigger" data-wp-init="callbacks.initTriggerButton" data-wp-on--click="actions.showLightbox" data-wp-style--right="context.imageButtonRight" data-wp-style--top="context.imageButtonTop" type="button"> <svg fill="none" height="12" viewbox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg"> <path d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" fill="#fff"></path> </svg> </button>&lt;/figure&gt;In the below example I then use that same access token to retrieve all groups in my lab tenant with the below code.</p>
+
+<p>&lt;figure class=”wp-block-image size-large wp-lightbox-container” data-wp-context=”{“uploadedSrc”:”http:\/\/codeartisanjourney.com\/wp-content\/uploads\/2023\/12\/FunctionRunExample.png”,”figureClassNames”:”wp-block-image size-large”,”figureStyles”:null,”imgClassNames”:”wp-image-125”,”imgStyles”:null,”targetWidth”:1153,”targetHeight”:841,”scaleAttr”:false,”ariaLabel”:”Enlarge image”,”alt”:””}” data-wp-interactive=”core/image”&gt;<img src="https://thomasklijnman.github.io/_site/assets/img/12/FunctionRunExample.png?resize=640%2C467" alt="" /><button aria-haspopup="dialog" aria-label="Enlarge image" class="lightbox-trigger" data-wp-init="callbacks.initTriggerButton" data-wp-on--click="actions.showLightbox" data-wp-style--right="context.imageButtonRight" data-wp-style--top="context.imageButtonTop" type="button"> <svg fill="none" height="12" viewbox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg"> <path d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" fill="#fff"></path> </svg> </button>&lt;/figure&gt;## Moving Beyond PowerShell Modules</p>
+
+<p>While Powershell modules are good tools, breaking away from their dependency has allowed me to explore more of the Microsoft Graph API possibilities. This shift from Powershell modules has also expanded my personal perspective and allows me to get more potential out of the Microsoft API services without relying solely on predefined modules and cmdlets.</p>
+
+<p>More in depth Graph API posts will be posted soon.</p>
+
+  </div><a class="u-url" href="/graphapi/a-simplified-guide-connecting-to-microsoft-graph-api-with-powershell/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Code Artisan Journey</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Code Artisan Journey</li><li><a class="u-email" href="mailto:thomas@klijnman.nl">thomas@klijnman.nl</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>The Code Artisan Journey</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
