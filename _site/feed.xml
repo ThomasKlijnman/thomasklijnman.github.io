@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-08-10T22:41:24+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Code Artisan Journey</title><subtitle>The Code Artisan Journey</subtitle><author><name>GitHub User</name><email>your-email@domain.com</email></author><entry><title type="html">Optimizing for security: Graph API Access Control</title><link href="http://localhost:4000/graphapi/optimizing-for-security-graph-api-access-control/" rel="alternate" type="text/html" title="Optimizing for security: Graph API Access Control" /><published>2024-02-04T19:36:19+01:00</published><updated>2024-02-04T19:36:19+01:00</updated><id>http://localhost:4000/graphapi/optimizing-for-security-graph-api-access-control</id><content type="html" xml:base="http://localhost:4000/graphapi/optimizing-for-security-graph-api-access-control/"><![CDATA[<h3 id="why-should-restrictions-be-imposed-on-graphapi-access">Why should restrictions be imposed on GraphAPI access?</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-08-10T23:03:00+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Code Artisan Journey</title><author><name>Thomas Klijnman</name><email>thomas@klijnman.nl</email></author><entry><title type="html">Optimizing for security: Graph API Access Control</title><link href="http://localhost:4000/graphapi/optimizing-for-security-graph-api-access-control/" rel="alternate" type="text/html" title="Optimizing for security: Graph API Access Control" /><published>2024-02-04T19:36:19+01:00</published><updated>2024-02-04T19:36:19+01:00</updated><id>http://localhost:4000/graphapi/optimizing-for-security-graph-api-access-control</id><content type="html" xml:base="http://localhost:4000/graphapi/optimizing-for-security-graph-api-access-control/"><![CDATA[<h3 id="why-should-restrictions-be-imposed-on-graphapi-access">Why should restrictions be imposed on GraphAPI access?</h3>
 
 <p>Granting permissions to Entra ID App registrations for access via the Graph API to Azure tenants can provide significant benefits, particularly in service automation scenarios.</p>
 
@@ -84,6 +84,7 @@ The instructions below assume that you have a Microsoft Entra Workload-ID licens
 <details class="wp-block-details has-vivid-red-color has-text-color has-link-color has-small-font-size wp-elements-d122976472ec6003c19f8ad69b44c955 is-layout-flow wp-block-details-is-layout-flow"><summary>Disclaimer</summary>This section assumes that you are already familiar with and have set up an Entra ID App registration, along with the addition of API permissions and a client secret.
 
 </details>
+
 <p>Let’s dive straight into the scripting part. I’ve created a few simple functions in PowerShell that send and retrieve an access token.</p>
 
 <p>See the below scripts that I’ve used for this example:</p>
@@ -138,6 +139,7 @@ function Invoke-GraphApi {
 <details class="wp-block-details has-small-font-size is-layout-flow wp-block-details-is-layout-flow"><summary>Technical note</summary>Due to limitations in the underlying method used in the .NET Framework by the Invoke-RestMethod, the body parameter can only be used when the HTTP method is not GET. That’s why this script works in Powershell 7. But can be modified to be used in Powershell 5.1.
 
 </details>
+
 <p>Using both the authorization and function together gives the possibility to make a variety of requests, ranging from simple GET requests to more complex POST and PATCH requests, this along with incorporating parameters in the request body, it enables a simple approach to handling diverse types of requests with ease using the same method.</p>
 
 <p>Well.. How easy can this be?</p>
