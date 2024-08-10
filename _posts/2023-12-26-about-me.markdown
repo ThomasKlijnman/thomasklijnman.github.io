@@ -1,0 +1,21 @@
+---
+id: 65
+title: 'About me'
+date: '2023-12-26T15:49:42+01:00'
+author: Thomas
+layout: post
+guid: 'https://codeartisanjourney.com/?p=65'
+permalink: /about/about-me/
+categories:
+    - About
+---
+
+Meet me, Thomas Klijnman, a 26-year-old Flevoland native.
+
+For the past four years,I’ve been part of the Pink Elephant family, currently rocking it as a System Engineer for office automation.
+
+My focus revolves around the Pink Workplace, where I dive into different focus areas, such as identity management using Tools4Ever’s HelloID, configure the workplace with Liquit Workspace and the PSADT toolkit, and navigating the landscape of Microsoft Azure.
+
+One of my current focus areas is navigating the vast landscape of the Microsoft Graph API. It’s here that I get to explore and implement new solutions to use in service automation setups and contributing to the technological backbone of Pink Ka.
+
+Join me on this blog as I share insights, experiences, and challenges that come with current IT landscapes.
