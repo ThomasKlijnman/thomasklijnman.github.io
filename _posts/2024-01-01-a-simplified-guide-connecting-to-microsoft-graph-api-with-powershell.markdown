@@ -35,7 +35,8 @@ The simplicity of this method allows for a seamless interaction with the array o
 
 <details class="wp-block-details has-vivid-red-color has-text-color has-link-color has-small-font-size wp-elements-d122976472ec6003c19f8ad69b44c955 is-layout-flow wp-block-details-is-layout-flow"><summary>Disclaimer</summary>This section assumes that you are already familiar with and have set up an Entra ID App registration, along with the addition of API permissions and a client secret.
 
-</details>  
+</details> 
+ 
 Let’s dive straight into the scripting part. I’ve created a few simple functions in PowerShell that send and retrieve an access token.
 
 See the below scripts that I’ve used for this example:
@@ -92,6 +93,7 @@ function Invoke-GraphApi {
 <details class="wp-block-details has-small-font-size is-layout-flow wp-block-details-is-layout-flow"><summary>Technical note</summary>Due to limitations in the underlying method used in the .NET Framework by the Invoke-RestMethod, the body parameter can only be used when the HTTP method is not GET. That’s why this script works in Powershell 7. But can be modified to be used in Powershell 5.1.
 
 </details>  
+
 Using both the authorization and function together gives the possibility to make a variety of requests, ranging from simple GET requests to more complex POST and PATCH requests, this along with incorporating parameters in the request body, it enables a simple approach to handling diverse types of requests with ease using the same method.
 
 Well.. How easy can this be?

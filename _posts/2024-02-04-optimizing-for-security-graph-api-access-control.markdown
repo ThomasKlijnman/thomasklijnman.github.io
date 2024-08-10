@@ -35,6 +35,7 @@ The instructions below assume that you have a Microsoft Entra Workload-ID licens
 
 </details>
 
+
 ### Creating the named location
 
 The journey begins with creating a named location, the first step in defining the IPs we want to exclude from our conditional access policy.

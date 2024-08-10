@@ -41,11 +41,10 @@ markdown: kramdown
 minima:
     skin: dark
     
-exclude:
-  - "Gemfile"
-  - "Gemfile.lock"
-  - "node_modules"
-  - "vendor/bundle/"
-  - "vendor/cache/"
-  - "vendor/gems/"
-  - "vendor/ruby/"
+ exclude:
+  - "package*.json"
+  - "*.config.js"
+  - netlify.toml
+  - README.md
+  - LICENSE
+  - Makefile

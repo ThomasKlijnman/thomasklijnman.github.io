@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://localhost:4000/about/about-me/</loc>
+<lastmod>2023-12-26T15:49:42+01:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/graphapi/a-simplified-guide-connecting-to-microsoft-graph-api-with-powershell/</loc>
+<lastmod>2024-01-01T16:15:03+01:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/graphapi/optimizing-for-security-graph-api-access-control/</loc>
+<lastmod>2024-02-04T19:36:19+01:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/about/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/</loc>
+</url>
+</urlset>
