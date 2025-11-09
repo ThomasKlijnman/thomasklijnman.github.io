@@ -67,10 +67,4 @@ DevProxy allows you to enforce least privilege by restricting access to your API
 
 ### Example: Combining Throttling and Least Privilege
 
-By combining throttling and least privilege, you can create a robust security posture for your API. For instance, you might allow a higher request rate for trusted IPs while strictly limiting access to sensitive endpoints, as shown in this configuration:
-
-```json
-{
-    "port": 8080,
-}
-```
+By combining throttling and least privilege, you can create a robust security posture for your API. 
