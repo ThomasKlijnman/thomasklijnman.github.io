@@ -4,3 +4,5 @@ _site/
 .jekyll-metadata
 .vscode
 .github
+Gemfile.lock
+_includes/header.html.bak
