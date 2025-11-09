@@ -39,7 +39,7 @@ Installing DevProxy on a Windows system is straightforward, especially with the 
 
 With the Command Prompt open, use Winget to install DevProxy by running the following command:
 
-    ```Console
+    ```json
     winget install Microsoft.DevProxy
     ```
 
@@ -75,3 +75,4 @@ By combining throttling and least privilege, you can create a robust security po
 {
     "port": 8080,
 }
+```
