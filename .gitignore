@@ -6,3 +6,4 @@ _site/
 .github
 Gemfile.lock
 _includes/header.html.bak
+*.bak
