@@ -43,8 +43,6 @@ With the Command Prompt open, use Winget to install DevProxy by running the foll
     winget install Microsoft.DevProxy
     ```
 
-![DevProxy Throttling Example](path/to/screenshot.png)
-
 ### Enforcing Least Privilege with DevProxy
 
 The principle of least privilege dictates that entities (users, applications, etc.) should have the minimum access necessary to perform their functions. By restricting permissions, you minimize the potential impact of a security breach.
