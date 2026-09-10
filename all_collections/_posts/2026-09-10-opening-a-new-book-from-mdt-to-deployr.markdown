@@ -88,7 +88,7 @@ The end result behaves exactly like the classic **Apply Operating System** step 
 
 ### Do not skip the branding
 
-One thing I would not leave out, however tempting it is to call it cosmetic: brand your boot media. Look at the bottom right of both screenshots above - that is our own artwork, on the 2PXE menu and on the WinPE background behind the task sequence window. It is the difference between "is this thing legitimate?" and a service desk that trusts what it is looking at, and it costs about ten minutes.
+One thing I would not leave out, however tempting it is to call it cosmetic: brand your boot media. Look at the bottom right of every screenshot in this post - that is our own artwork, blurred here, sitting on the 2PXE menu and on the WinPE background behind the task sequence window. It is the difference between "is this thing legitimate?" and a service desk that trusts what it is looking at, and it costs about ten minutes.
 
 Straight from the [2Pint documentation](https://documentation.2pintsoftware.com/deployr/getting-started/generate-windows-pe-boot-images/brand-winpe-background), the short version for the WinPE background:
 
